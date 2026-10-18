@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لعبة فهيم - YAM GAMES</title>
+  <!-- خط تجوال العربي -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- رابط ملف التنسيقات الخارجية -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- الخلفية التفاعلية (فقاعات عائمة) -->
+  <div class="bg-animated">
+    <div class="bubble" style="width: 80px; height: 80px; left: 10%; animation-duration: 8s;"></div>
+    <div class="bubble" style="width: 120px; height: 120px; left: 25%; animation-duration: 12s; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; left: 50%; animation-duration: 6s; animation-delay: 1s;"></div>
+    <div class="bubble" style="width: 100px; height: 100px; left: 75%; animation-duration: 10s; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 90px; height: 90px; left: 90%; animation-duration: 9s; animation-delay: 4s;"></div>
+  </div>
+
+  <!-- زر التحكم بالصوت -->
+  <button id="audio-toggle-btn" class="audio-btn" onclick="toggleAudio()" title="كتم/تشغيل الصوت">
+    🔊
+  </button>
+
+  <div class="container">
+
+    <!-- الشاشة 1: الترحيب والإعدادات -->
+    <div id="screen-welcome" class="screen active">
+      <div class="welcome-header">
+        <p class="sub-title">أهلاً بك في</p>
+
+        <!-- الشعار المزخرف والنابض -->
+        <div class="logo-container">
+          <div class="ornament ornament-top">✦ ✧ ✦ ✧ ✦</div>
+          <h1 class="pulsing-logo">فَــهِــيــم</h1>
+          <div class="ornament ornament-bottom">✦ ✧ ✦ ✧ ✦</div>
+        </div>
+
+        <p class="tagline">لعبة التحدي والذكاء الجماعية</p>
+      </div>
+
+      <!-- نموذج إعدادات اللعبة -->
+      <div class="card settings-card">
+        <h2>⚙️ إعدادات المباراة</h2>
+
+        <!-- أسماء الفرق -->
+        <div class="form-group row">
+          <div class="col">
+            <label>اسم الفريق الأول</label>
+            <input type="text" id="team1-name" value="الفريق الأول" placeholder="مثال: الصقور">
+          </div>
+          <div class="col">
+            <label>اسم الفريق الثاني</label>
+            <input type="text" id="team2-name" value="الفريق الثاني" placeholder="مثال: فرسان">
+          </div>
+        </div>
+
+        <!-- عدد المجموعات -->
+        <div class="form-group">
+          <label>اختر عدد المجموعات</label>
+          <div class="button-group">
+            <button class="btn-select active" onclick="selectGroupsCount(6, this)">6 مجموعات</button>
+            <button class="btn-select" onclick="selectGroupsCount(8, this)">8 مجموعات</button>
+          </div>
+        </div>
+
+        <!-- وقت الإجابة الأساسي -->
+        <div class="form-group">
+          <label>وقت الإجابة للفريق الأساسي</label>
+          <div class="button-group">
+            <button class="btn-select" onclick="selectPrimaryTime(15, this)">15 ثانية</button>
+            <button class="btn-select active" onclick="selectPrimaryTime(30, this)">30 ثانية</button>
+            <button class="btn-select" onclick="selectPrimaryTime(60, this)">60 ثانية</button>
+          </div>
+        </div>
+
+        <!-- وقت تحويل الفرصة -->
+        <div class="form-group">
+          <label>وقت الإجابة عند تحويل السؤال للخصم</label>
+          <div class="button-group">
+            <button class="btn-select active" onclick="selectSecondaryTime(15, this)">15 ثانية</button>
+            <button class="btn-select" onclick="selectSecondaryTime(30, this)">30 ثانية</button>
+            <button class="btn-select" onclick="selectSecondaryTime(60, this)">60 ثانية</button>
+          </div>
+        </div>
+
+        <!-- المساعدات الإضافية -->
+        <div class="form-group">
+          <label>المساعدات الإضافية المتاحة</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" id="help-double" checked>
+              <span>⭐ نقاط مضاعفة (سؤال عشوائي بنقاط مضاعفة)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="help-pass" checked>
+              <span>🔄 تحويل تلقائي (سؤال ملغي يذهب للخصم)</span>
+            </label>
+          </div>
+        </div>
+
+        <button class="btn-main" onclick="startLoadingToCategories()">ابدأ اللعبة 🚀</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 2: التحميل الأول (7 ثواني + نصائح) -->
+    <div id="screen-loading-1" class="screen">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <h2>جاري تحضير ميدان التحدي...</h2>
+        
+        <div class="tip-box">
+          <span class="tip-icon">💡</span>
+          <p id="tip-text-1" class="tip-text">لا تنسَ صلاتك؛ فهي نور حياتك.</p>
+        </div>
+        
+        <div class="progress-bar">
+          <div id="progress-fill-1" class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- الشاشة 3: اختيار المجموعات -->
+    <div id="screen-category-select" class="screen">
+      <div class="header-banner">
+        <h2>🎯 اختر المجموعات المفضلة</h2>
+        <p id="category-select-instruction">قم بانتخاب المجموعات لبدء المنافسة</p>
+      </div>
+
+      <div id="categories-grid-selection" class="categories-selection-grid">
+        <!-- يتم توليد المجموعات بواسطة JavaScript -->
+      </div>
+
+      <button id="btn-confirm-categories" class="btn-main" onclick="confirmCategorySelection()" disabled>
+        اعتماد المجموعات والدخول للعبة ⚡
+      </button>
+    </div>
+
+    <!-- الشاشة 4: التحميل الثاني (تنبيه تدوير الشاشة) -->
+    <div id="screen-loading-2" class="screen">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <h2>جاري تجهيز لوحة الأسئلة...</h2>
+
+        <div class="rotate-device-alert">
+          <div class="phone-icon">📱 🔄</div>
+          <p>يرجى تدوير الجوال بالعرض لتجربة لعب مثالية!</p>
+        </div>
+
+        <div class="tip-box">
+          <span class="tip-icon">✨</span>
+          <p id="tip-text-2" class="tip-text">املأ وقت فراغك بالاستغفار وذكر الله.</p>
+        </div>
+
+        <div class="progress-bar">
+          <div id="progress-fill-2" class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- الشاشة 5: لوحة اللعبة الرئيسية (Grid) -->
+    <div id="screen-gameboard" class="screen">
+      <!-- شريط النتيجة العلوي -->
+      <div class="scoreboard">
+        <div id="team1-card" class="team-card active-turn">
+          <h3 id="display-team1-name">الفريق الأول</h3>
+          <div class="score" id="display-team1-score">0</div>
+        </div>
+
+        <div class="game-info-center">
+          <div class="turn-indicator" id="turn-indicator">دور: الفريق الأول</div>
+          <button class="btn-secondary" onclick="endGame()">إنهاء اللعبة 🏁</button>
+        </div>
+
+        <div id="team2-card" class="team-card">
+          <h3 id="display-team2-name">الفريق الثاني</h3>
+          <div class="score" id="display-team2-score">0</div>
+        </div>
+      </div>
+
+      <!-- شبكة المجموعات والأسئلة -->
+      <div id="game-grid-container" class="game-grid">
+        <!-- يتم إنشاؤها ديناميكياً عن طريق JavaScript -->
+      </div>
+    </div>
+
+    <!-- مودال (نافذة) السؤال -->
+    <div id="question-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span id="modal-category-name" class="badge">اسم المجموعة</span>
+          <span id="modal-points" class="badge badge-gold">100 نقطة</span>
+        </div>
+
+        <!-- المؤقت -->
+        <div class="timer-container">
+          <div id="timer-display" class="timer-circle">30</div>
+        </div>
+
+        <!-- نص السؤال -->
+        <div class="question-body">
+          <h2 id="modal-question-text">نص السؤال يظهر هنا؟</h2>
+        </div>
+
+        <!-- الأزرار والتحكم -->
+        <div class="modal-actions">
+          <button id="btn-show-answer" class="btn-action btn-info" onclick="revealAnswer()">إظهار الإجابة 👁️</button>
+        </div>
+
+        <!-- منطقة الإجابة الصحيحة -->
+        <div id="answer-box" class="answer-box hidden">
+          <h4>الإجابة الصحيحة:</h4>
+          <p id="modal-answer-text">تظهر الإجابة هنا...</p>
+
+          <div class="score-buttons">
+            <button class="btn-action btn-success" onclick="awardPoints(true)">إجابة صحيحة (+النقاط)</button>
+            <button class="btn-action btn-danger" onclick="awardPoints(false)">إجابة خاطئة / انتهاء الوقت</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- مودال النتيجة النهائية -->
+    <div id="winner-modal" class="modal">
+      <div class="modal-content winner-content">
+        <h1 class="trophy">🏆</h1>
+        <h2 id="winner-text">الفائز هو!</h2>
+        <div class="final-scores">
+          <p id="final-team1-score">الفريق الأول: 0</p>
+          <p id="final-team2-score">الفريق الثاني: 0</p>
+        </div>
+        <button class="btn-main" onclick="location.reload()">لعب مباراة جديدة 🔄</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- رابط ملف البرمجة الخارجية -->
+  <script src="script.js"></script>
+</body>
+</html>
