@@ -1,244 +1,153 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لعبة فهيم - YAM GAMES</title>
-  <!-- خط تجوال العربي -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-  <!-- رابط ملف التنسيقات الخارجية -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAM GAMES | متجر الألعاب البرمجية</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-black">
 
-  <!-- الخلفية التفاعلية (فقاعات عائمة) -->
-  <div class="bg-animated">
-    <div class="bubble" style="width: 80px; height: 80px; left: 10%; animation-duration: 8s;"></div>
-    <div class="bubble" style="width: 120px; height: 120px; left: 25%; animation-duration: 12s; animation-delay: 2s;"></div>
-    <div class="bubble" style="width: 50px; height: 50px; left: 50%; animation-duration: 6s; animation-delay: 1s;"></div>
-    <div class="bubble" style="width: 100px; height: 100px; left: 75%; animation-duration: 10s; animation-delay: 3s;"></div>
-    <div class="bubble" style="width: 90px; height: 90px; left: 90%; animation-duration: 9s; animation-delay: 4s;"></div>
-  </div>
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-yellow-600 via-yellow-400 to-amber-200 flex items-center justify-center shadow-gold-glow text-black text-xl font-black">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wider gold-gradient-text block leading-none">YAM GAMES</span>
+                        <span class="text-[10px] text-gray-400 font-semibold tracking-widest uppercase">متجر الألعاب المبرمجة</span>
+                    </div>
+                </div>
 
-  <!-- زر التحكم بالصوت -->
-  <button id="audio-toggle-btn" class="audio-btn" onclick="toggleAudio()" title="كتم/تشغيل الصوت">
-    🔊
-  </button>
+                <div class="flex items-center gap-3">
+                    <a href="admin.php" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 bg-dark-card hover:bg-dark-hover text-gray-300 border border-dark-border hover:border-gold-500/50">
+                        <i class="fa-solid fa-user-shield text-gold-500"></i>
+                        <span>لوحة التحكم</span>
+                    </a>
 
-  <div class="container">
+                    <a href="https://wa.me/966500000000" target="_blank" class="px-4 py-2 rounded-xl text-sm font-bold gold-btn flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span class="hidden sm:inline">تواصل مباشر</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <!-- الشاشة 1: الترحيب والإعدادات -->
-    <div id="screen-welcome" class="screen active">
-      <div class="welcome-header">
-        <p class="sub-title">أهلاً بك في</p>
-
-        <!-- الشعار المزخرف والنابض -->
-        <div class="logo-container">
-          <div class="ornament ornament-top">✦ ✧ ✦ ✧ ✦</div>
-          <h1 class="pulsing-logo">فَــهِــيــم</h1>
-          <div class="ornament ornament-bottom">✦ ✧ ✦ ✧ ✦</div>
+    <!-- MAIN STORE SECTION -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <!-- HERO BANNER -->
+        <div class="relative rounded-3xl overflow-hidden mb-10 glass-panel p-8 md:p-12 border border-gold-500/20 shadow-2xl">
+            <div class="absolute -top-24 -left-24 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs font-bold border border-yellow-500/30 mb-4 inline-block">
+                    <i class="fa-solid fa-crown ml-1"></i> ألعاب ويب وأكواد مصدريّة احترافية
+                </span>
+                <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
+                    امتلك ألعابك البرمجية الخاصة <br><span class="gold-gradient-text">بأكواد مصدريّة كاملة 100%</span>
+                </h1>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
+                    نوفر ألعاب ويب تفاعلية مبرمجة بأعلى معايير الجودة (HTML, JS, Tailwind) جاهزة للرفع المباشر على استضافتك واستثمارها أو تخصيصها لمشروعك الخاص.
+                </p>
+            </div>
         </div>
 
-        <p class="tagline">لعبة التحدي والذكاء الجماعية</p>
-      </div>
+        <!-- SEARCH AND FILTERS SECTION -->
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
+            <div class="relative w-full md:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="search-input" oninput="renderStoreGames()" placeholder="ابحث عن لعبة..." class="w-full bg-dark-card border border-dark-border focus:border-gold-500 rounded-xl py-3 pr-11 pl-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none transition-all">
+            </div>
 
-      <!-- نموذج إعدادات اللعبة -->
-      <div class="card settings-card">
-        <h2>⚙️ إعدادات المباراة</h2>
-
-        <!-- أسماء الفرق -->
-        <div class="form-group row">
-          <div class="col">
-            <label>اسم الفريق الأول</label>
-            <input type="text" id="team1-name" value="الفريق الأول" placeholder="مثال: الصقور">
-          </div>
-          <div class="col">
-            <label>اسم الفريق الثاني</label>
-            <input type="text" id="team2-name" value="الفريق الثاني" placeholder="مثال: فرسان">
-          </div>
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0" id="category-filters">
+                <!-- Filters rendered dynamically -->
+            </div>
         </div>
 
-        <!-- عدد المجموعات -->
-        <div class="form-group">
-          <label>اختر عدد المجموعات</label>
-          <div class="button-group">
-            <button class="btn-select active" onclick="selectGroupsCount(6, this)">6 مجموعات</button>
-            <button class="btn-select" onclick="selectGroupsCount(8, this)">8 مجموعات</button>
-          </div>
+        <!-- GAMES GRID -->
+        <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Game Cards loaded by JS -->
         </div>
 
-        <!-- وقت الإجابة الأساسي -->
-        <div class="form-group">
-          <label>وقت الإجابة للفريق الأساسي</label>
-          <div class="button-group">
-            <button class="btn-select" onclick="selectPrimaryTime(15, this)">15 ثانية</button>
-            <button class="btn-select active" onclick="selectPrimaryTime(30, this)">30 ثانية</button>
-            <button class="btn-select" onclick="selectPrimaryTime(60, this)">60 ثانية</button>
-          </div>
+        <!-- EMPTY STATE -->
+        <div id="empty-store" class="hidden text-center py-16 glass-panel rounded-2xl my-8">
+            <i class="fa-solid fa-ghost text-5xl text-gray-600 mb-4 block"></i>
+            <h3 class="text-xl font-bold text-gray-300 mb-2">لا توجد ألعاب مطابقة</h3>
+            <p class="text-sm text-gray-500">جرب البحث بكلمات أخرى أو اختر تصنيفاً مختلفاً.</p>
         </div>
+    </main>
 
-        <!-- وقت تحويل الفرصة -->
-        <div class="form-group">
-          <label>وقت الإجابة عند تحويل السؤال للخصم</label>
-          <div class="button-group">
-            <button class="btn-select active" onclick="selectSecondaryTime(15, this)">15 ثانية</button>
-            <button class="btn-select" onclick="selectSecondaryTime(30, this)">30 ثانية</button>
-            <button class="btn-select" onclick="selectSecondaryTime(60, this)">60 ثانية</button>
-          </div>
+    <!-- MODAL: GAME PREVIEW -->
+    <div id="modal-game-preview" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-gold-500/30 overflow-hidden relative max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-dark-border flex justify-between items-center bg-dark-card">
+                <h3 class="font-bold text-white text-sm flex items-center gap-2" id="preview-modal-title">
+                    <i class="fa-solid fa-gamepad text-gold-500"></i> معاينة اللعبة
+                </h3>
+                <button onclick="closeModal('modal-game-preview')" class="text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 flex-1">
+                <div class="relative h-64 rounded-xl overflow-hidden border border-dark-border">
+                    <img id="preview-modal-img" src="" alt="Game" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+                        <span id="preview-modal-badge" class="px-3 py-1 rounded-full bg-yellow-500 text-black text-xs font-bold"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-2" id="preview-modal-name"></h4>
+                    <p class="text-gray-300 text-sm leading-relaxed" id="preview-modal-desc"></p>
+                </div>
+
+                <div>
+                    <h5 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-2">مميزات هذا الكود البرمجي:</h5>
+                    <div id="preview-modal-features" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-300"></div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-dark-border bg-dark-card flex flex-wrap justify-between items-center gap-4">
+                <div>
+                    <span class="text-xs text-gray-400 block">السعر المطلوب</span>
+                    <span class="text-2xl font-black text-yellow-400" id="preview-modal-price"></span>
+                </div>
+                <div class="flex gap-2">
+                    <a id="preview-modal-demolink" href="#" target="_blank" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-dark-card hover:bg-dark-hover border border-gold-500/40 text-yellow-400 flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> تجربة العرض المباشر (Demo)
+                    </a>
+                    <a id="preview-modal-buy-btn" href="#" target="_blank" class="gold-btn px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> شراء الآن عبر الواتساب
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <!-- المساعدات الإضافية -->
-        <div class="form-group">
-          <label>المساعدات الإضافية المتاحة</label>
-          <div class="checkbox-group">
-            <label class="checkbox-item">
-              <input type="checkbox" id="help-double" checked>
-              <span>⭐ نقاط مضاعفة (سؤال عشوائي بنقاط مضاعفة)</span>
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="help-pass" checked>
-              <span>🔄 تحويل تلقائي (سؤال ملغي يذهب للخصم)</span>
-            </label>
-          </div>
-        </div>
-
-        <button class="btn-main" onclick="startLoadingToCategories()">ابدأ اللعبة 🚀</button>
-      </div>
     </div>
 
-    <!-- الشاشة 2: التحميل الأول (7 ثواني + نصائح) -->
-    <div id="screen-loading-1" class="screen">
-      <div class="loading-content">
-        <div class="spinner"></div>
-        <h2>جاري تحضير ميدان التحدي...</h2>
-        
-        <div class="tip-box">
-          <span class="tip-icon">💡</span>
-          <p id="tip-text-1" class="tip-text">لا تنسَ صلاتك؛ فهي نور حياتك.</p>
+    <!-- FOOTER -->
+    <footer class="border-t border-dark-border bg-dark-bg py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <i class="fa-solid fa-crown text-yellow-500 text-sm"></i>
+                <span class="text-sm font-black gold-gradient-text">YAM GAMES</span>
+            </div>
+            <p class="text-xs text-gray-500">جميع الحقوق محفوظة &copy; 2026 - منصة بيع الألعاب المبرمجة بالكامل</p>
         </div>
-        
-        <div class="progress-bar">
-          <div id="progress-fill-1" class="progress-fill"></div>
-        </div>
-      </div>
-    </div>
+    </footer>
 
-    <!-- الشاشة 3: اختيار المجموعات -->
-    <div id="screen-category-select" class="screen">
-      <div class="header-banner">
-        <h2>🎯 اختر المجموعات المفضلة</h2>
-        <p id="category-select-instruction">قم بانتخاب المجموعات لبدء المنافسة</p>
-      </div>
-
-      <div id="categories-grid-selection" class="categories-selection-grid">
-        <!-- يتم توليد المجموعات بواسطة JavaScript -->
-      </div>
-
-      <button id="btn-confirm-categories" class="btn-main" onclick="confirmCategorySelection()" disabled>
-        اعتماد المجموعات والدخول للعبة ⚡
-      </button>
-    </div>
-
-    <!-- الشاشة 4: التحميل الثاني (تنبيه تدوير الشاشة) -->
-    <div id="screen-loading-2" class="screen">
-      <div class="loading-content">
-        <div class="spinner"></div>
-        <h2>جاري تجهيز لوحة الأسئلة...</h2>
-
-        <div class="rotate-device-alert">
-          <div class="phone-icon">📱 🔄</div>
-          <p>يرجى تدوير الجوال بالعرض لتجربة لعب مثالية!</p>
-        </div>
-
-        <div class="tip-box">
-          <span class="tip-icon">✨</span>
-          <p id="tip-text-2" class="tip-text">املأ وقت فراغك بالاستغفار وذكر الله.</p>
-        </div>
-
-        <div class="progress-bar">
-          <div id="progress-fill-2" class="progress-fill"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- الشاشة 5: لوحة اللعبة الرئيسية (Grid) -->
-    <div id="screen-gameboard" class="screen">
-      <!-- شريط النتيجة العلوي -->
-      <div class="scoreboard">
-        <div id="team1-card" class="team-card active-turn">
-          <h3 id="display-team1-name">الفريق الأول</h3>
-          <div class="score" id="display-team1-score">0</div>
-        </div>
-
-        <div class="game-info-center">
-          <div class="turn-indicator" id="turn-indicator">دور: الفريق الأول</div>
-          <button class="btn-secondary" onclick="endGame()">إنهاء اللعبة 🏁</button>
-        </div>
-
-        <div id="team2-card" class="team-card">
-          <h3 id="display-team2-name">الفريق الثاني</h3>
-          <div class="score" id="display-team2-score">0</div>
-        </div>
-      </div>
-
-      <!-- شبكة المجموعات والأسئلة -->
-      <div id="game-grid-container" class="game-grid">
-        <!-- يتم إنشاؤها ديناميكياً عن طريق JavaScript -->
-      </div>
-    </div>
-
-    <!-- مودال (نافذة) السؤال -->
-    <div id="question-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <span id="modal-category-name" class="badge">اسم المجموعة</span>
-          <span id="modal-points" class="badge badge-gold">100 نقطة</span>
-        </div>
-
-        <!-- المؤقت -->
-        <div class="timer-container">
-          <div id="timer-display" class="timer-circle">30</div>
-        </div>
-
-        <!-- نص السؤال -->
-        <div class="question-body">
-          <h2 id="modal-question-text">نص السؤال يظهر هنا؟</h2>
-        </div>
-
-        <!-- الأزرار والتحكم -->
-        <div class="modal-actions">
-          <button id="btn-show-answer" class="btn-action btn-info" onclick="revealAnswer()">إظهار الإجابة 👁️</button>
-        </div>
-
-        <!-- منطقة الإجابة الصحيحة -->
-        <div id="answer-box" class="answer-box hidden">
-          <h4>الإجابة الصحيحة:</h4>
-          <p id="modal-answer-text">تظهر الإجابة هنا...</p>
-
-          <div class="score-buttons">
-            <button class="btn-action btn-success" onclick="awardPoints(true)">إجابة صحيحة (+النقاط)</button>
-            <button class="btn-action btn-danger" onclick="awardPoints(false)">إجابة خاطئة / انتهاء الوقت</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- مودال النتيجة النهائية -->
-    <div id="winner-modal" class="modal">
-      <div class="modal-content winner-content">
-        <h1 class="trophy">🏆</h1>
-        <h2 id="winner-text">الفائز هو!</h2>
-        <div class="final-scores">
-          <p id="final-team1-score">الفريق الأول: 0</p>
-          <p id="final-team2-score">الفريق الثاني: 0</p>
-        </div>
-        <button class="btn-main" onclick="location.reload()">لعب مباراة جديدة 🔄</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- رابط ملف البرمجة الخارجية -->
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
