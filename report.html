@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير الفحص برقم الجوال | مركز المختص الفاحص</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Cairo', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .red-text { color: #dc2626; }
+        .red-bg { background-color: #dc2626; color: #ffffff; }
+        .red-bg:hover { background-color: #b91c1c; }
+        .card-white {
+            background: #ffffff;
+            border: 2px solid #dc2626;
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.08);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- رأس الصفحة مع اللوجو الجديد -->
+    <header class="card-white border-b-2 border-red-600 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="شعار مركز المختص الفاحص" class="w-10 h-10 rounded-xl object-contain border border-red-500/30 bg-white shadow-md p-1">
+                <div>
+                    <h1 class="text-lg font-bold tracking-wider text-gray-950 flex items-center gap-1.5"> تقرير الفحص</h1>
+                    <p class="text-xs text-gray-500">مركز المختص الفاحص</p>
+                </div>
+            </div>
+            <a href="index.html" class="text-xs text-gray-900 hover:text-red-600 transition border-2 border-red-600 bg-red-50 px-3.5 py-2 rounded-xl flex items-center gap-1 font-bold shadow-sm">
+                <i class="fa-solid fa-house ml-1"></i> الرئيسية
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-xl mx-auto px-4 py-10 flex-grow w-full">
+        <div class="card-white p-6 md:p-8 rounded-3xl text-center space-y-4">
+            <div class="w-14 h-14 bg-red-50 border border-red-200 text-red-600 rounded-full flex items-center justify-center mx-auto text-xl shadow-md">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900">استعلام عن تقرير الفحص</h2>
+            <p class="text-xs text-gray-500">أدخل رقم الجوال المسجل لدينا لعرض جميع التقارير الخاصة بسيارتك.</p>
+            
+            <div class="flex gap-2">
+                <input type="text" id="searchPhoneInput" placeholder="أدخل رقم الجوال (مثال: 05...)" class="flex-grow bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-red-600">
+                <button onclick="searchReports()" class="red-bg font-bold px-6 py-3 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow-lg shadow-red-600/20">
+                    بحث
+                </button>
+            </div>
+
+            <div id="reportsResultContainer" class="mt-6 text-right space-y-4"></div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 border-t border-gray-200 py-6 text-center text-xs text-gray-500">
+        <p>جميع الحقوق محفوظة © 2026 - مركز المختص الفاحص</p>
+    </footer>
+
+    <script>
+        function searchReports() {
+            let phone = document.getElementById('searchPhoneInput').value.trim();
+            let container = document.getElementById('reportsResultContainer');
+            container.innerHTML = '';
+
+            if(!phone) {
+                alert('الرجاء إدخال رقم الجوال للبحث');
+                return;
+            }
+
+            let reports = JSON.parse(localStorage.getItem('center_reports')) || [];
+            let matched = reports.filter(r => r.phone === phone);
+
+            if(matched.length === 0) {
+                container.innerHTML = `<div class="p-4 bg-red-50 border border-red-200 text-red-600 text-xs rounded-xl text-center">لا توجد تقارير مسجلة بهذا الرقم حالياً.</div>`;
+                return;
+            }
+
+            matched.forEach((rep, index) => {
+                let currentUrl = window.location.href.split('?')[0].replace('report.html', '');
+                let reportUrl = `${currentUrl}view-report.html?id=${rep.id}`;
+                
+                container.innerHTML += `
+                    <div class="bg-white border-2 border-red-600 p-5 rounded-2xl text-right space-y-3 shadow-md">
+                        <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                            <span class="text-red-600 font-bold">${rep.car}</span>
+                            <span class="text-xs text-gray-500">${rep.date}</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                            <div>الباقة: <span class="text-gray-900 font-bold">${rep.pkg}</span></div>
+                            <div>النتيجة: <span class="text-red-600 font-bold">${rep.result}</span></div>
+                            <div>اسم العميل: <span class="text-gray-900 font-bold">${rep.customerName || 'غير متوفر'}</span></div>
+                            <div>رقم اللوحة: <span class="text-gray-900 font-bold">${rep.plateNumber || 'غير متوفر'}</span></div>
+                        </div>
+                        <div class="text-xs bg-gray-50 p-3 rounded-xl border border-gray-200 text-gray-700">
+                            <strong>ملاحظات الفحص:</strong> ${rep.notes || 'لا توجد ملاحظات إضافية'}
+                        </div>
+                        
+                        <!-- زر عرض التقرير المباشر -->
+                        <div class="pt-2 border-t border-gray-200">
+                            <a href="${reportUrl}" target="_blank" class="w-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-300 py-3 rounded-xl text-xs font-bold text-center transition flex items-center justify-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-link"></i> عرض التقرير المباشر
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
