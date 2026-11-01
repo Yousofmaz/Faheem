@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز المختص فاحص | فحص شامل للسيارات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Cairo', sans-serif; background-color: #ffffff; color: #1e293b; overflow-x: hidden; }
+        .red-text { color: #dc2626; }
+        .red-bg { background-color: #dc2626; color: #ffffff; }
+        .red-bg:hover { background-color: #b91c1c; }
+        .card-white {
+            background: #ffffff;
+            border: 2px solid #dc2626;
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-white:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -10px rgba(220, 38, 38, 0.2);
+        }
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- رأس الصفحة مع اللوجو (النقر عليه يوجه للرئيسية) -->
+    <header class="card-white border-b-2 border-red-600 py-4 px-6 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="cursor-pointer">
+                    <img src="logo.png" alt="شعار مركز المختص الفاحص" class="w-14 h-14 rounded-2xl object-contain border-2 border-red-500 bg-white shadow-lg p-1 hover:scale-105 transition">
+                </a>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wider text-gray-900 flex items-center gap-1.5">مركز المختص الفاحص</h1>
+                    <p class="text-xs text-gray-500">احترافية ودقة عالية في فحص السيارات</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-10 flex-grow w-full space-y-10">
+        
+        <!-- كارت الترحيب الأول -->
+        <section class="card-white p-8 md:p-12 rounded-3xl text-center relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-48 h-48 bg-red-600/10 rounded-full blur-3xl"></div>
+            <span class="text-xs font-semibold text-red-600 bg-red-50 px-4 py-1.5 rounded-full border border-red-200 inline-block mb-4"><i class="fa-solid fa-award"></i> الخيار الأول والأدق لفحص السيارات</span>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 text-gray-900 leading-tight">مرحباً بكم في <span class="red-text">مركز المختص الفاحص</span></h2>
+            <p class="text-gray-600 text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+                نقدم خدمات فحص متكاملة لأجزاء السيارة بأحدث الأجهزة والتقنيات تحت إشراف نخبة من الخبراء والفنيين.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="booking.html" class="red-bg font-bold py-3.5 px-8 rounded-2xl text-sm transition shadow-lg shadow-red-600/20 inline-flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i> حجز موعد فحص
+                </a>
+                <a href="report.html" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3.5 px-8 rounded-2xl text-sm transition shadow-md border border-gray-300 inline-flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-invoice red-text"></i> تقرير الفحص برقم الجوال
+                </a>
+            </div>
+        </section>
+
+        <!-- مساحة إعلانية متحركة ومكبرة -->
+        <section id="indexAdBanner" class="hidden card-white p-8 rounded-3xl border-4 border-red-600 bg-red-50/90 overflow-hidden shadow-2xl cursor-pointer" onclick="openAdModal()">
+            <div class="text-center pb-3 border-b-2 border-red-200 mb-4">
+                <span class="text-xs font-bold red-bg px-4 py-1.5 rounded-full shadow-md"><i class="fa-solid fa-bullhorn ml-1"></i> إعلان مميز وحصري (انقر للتفاصيل الكاملة)</span>
+            </div>
+            
+            <div class="marquee-container py-2">
+                <div class="marquee-content inline-flex items-center gap-16 text-lg font-bold text-gray-900">
+                    <div class="flex flex-col items-center text-center space-y-3 bg-white p-5 rounded-3xl border-2 border-red-400 shadow-xl min-w-[320px]">
+                        <span id="indexAdTitle" class="text-gray-900 font-black text-xl red-text"></span>
+                        <img id="indexAdImg" src="" alt="صورة الإعلان" class="w-44 h-44 rounded-2xl object-cover border-4 border-red-600 shadow-xl hidden">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-gray-600 font-semibold">اسحب للمزيد ←</span>
+                            <span id="indexAdPrice" class="red-bg text-white px-5 py-2 rounded-xl text-sm font-bold shadow-md"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم صور تدل على الفحص باحترافية -->
+        <section class="space-y-6">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-900">احترافية ودقة في كل تفصيل</h3>
+                <p class="text-xs text-gray-500 mt-1">نستخدم أحدث التقنيات والأجهزة لفحص سيارتك بكل شفافية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card-white rounded-2xl overflow-hidden shadow-lg group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80" alt="فحص كمبيوتر" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h4 class="font-bold text-gray-900 mb-1">فحص بالكمبيوتر والأجهزة</h4>
+                        <p class="text-xs text-gray-500">فحص شامل لجميع حساسات وأنظمة السيارة الإلكترونية.</p>
+                    </div>
+                </div>
+
+                <div class="card-white rounded-2xl overflow-hidden shadow-lg group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80" alt="فحص محرك" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h4 class="font-bold text-gray-900 mb-1">فحص المحرك والقير</h4>
+                        <p class="text-xs text-gray-500">تقييم كامل لأداء المحرك وناقل الحركة وعزم السيارة.</p>
+                    </div>
+                </div>
+
+                <div class="card-white rounded-2xl overflow-hidden shadow-lg group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80" alt="فحص بودي وشاصي" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h4 class="font-bold text-gray-900 mb-1">فحص الشاصي والبودي</h4>
+                        <p class="text-xs text-gray-500">كشف دقيق عن الصدمات، الرش، وسلامة الهيكل الخارجي.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- كارت التواصل عبر الواتساب -->
+        <section class="card-white p-8 rounded-3xl text-center border-2 border-emerald-500 bg-emerald-50/30">
+            <div class="w-16 h-16 bg-emerald-100 border border-emerald-300 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-md">
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">تواصل معنا عبر الواتساب</h3>
+            <p class="text-gray-600 text-sm max-w-md mx-auto mb-6">
+                لديك استفسار أو ترغب في الاستفسار عن الخدمات؟ فريقنا جاهز لخدمتك والإجابة على كل تساؤلاتك فوراً.
+            </p>
+            <a href="https://wa.me/966599878570" target="_blank" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-8 rounded-2xl text-base transition shadow-lg transform hover:-translate-y-0.5">
+                <i class="fa-brands fa-whatsapp text-xl"></i> راسل المركز الآن (0599878570)
+            </a>
+        </section>
+
+    </main>
+
+    <!-- النافذة المنبثقة للإعلان -->
+    <div id="adModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="card-white p-8 rounded-3xl max-w-lg w-full space-y-6 border-t-8 border-red-600 shadow-2xl text-right relative bg-white">
+            <button onclick="closeAdModal()" class="absolute left-5 top-5 w-9 h-9 rounded-full bg-gray-100 hover:bg-red-50 text-gray-600 hover:text-red-600 flex items-center justify-center font-bold text-lg transition"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="border-b-2 border-gray-200 pb-4 pl-10">
+                <span class="text-xs text-red-600 font-bold block mb-1">تفاصيل العرض الحصري</span>
+                <h3 id="modalAdTitle" class="text-2xl font-black text-gray-900"></h3>
+            </div>
+
+            <div id="modalAdImgContainer" class="hidden text-center bg-gray-50 p-4 rounded-2xl border border-gray-200">
+                <img id="modalAdImg" src="" alt="صورة الإعلان مكبرة" class="max-h-72 w-full rounded-2xl mx-auto border-2 border-red-500 shadow-md object-contain">
+            </div>
+
+            <p id="modalAdText" class="text-sm text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-2xl border border-gray-200 font-medium"></p>
+
+            <div class="flex justify-between items-center pt-2 border-t border-gray-200">
+                <span id="modalAdPrice" class="red-bg text-white font-black px-5 py-2.5 rounded-2xl text-base shadow-lg"></span>
+                <button onclick="closeAdModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold px-6 py-2.5 rounded-2xl text-sm">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر الجديد المطابق تماماً للنموذج المرفق وبألوان وبيانات مركز المختص الفاحص -->
+    <footer class="bg-gray-950 text-white border-t-2 border-red-600 py-12 px-6 mt-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start border-b border-gray-800 pb-10">
+            
+            <!-- القسم الأول: اللوجو المكبر (يوجه للرئيسية) + الوصف -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="cursor-pointer">
+                        <img src="logo.png" alt="شعار مركز المختص الفاحص" class="w-16 h-16 rounded-2xl object-contain border-2 border-red-600 bg-white shadow-xl p-1.5 hover:scale-105 transition">
+                    </a>
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-white">مركز المختص الفاحص</h3>
+                        <p class="text-xs text-red-500 font-semibold">احترافية ودقة عالية في فحص السيارات</p>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 leading-relaxed max-w-sm">
+                    مركز موثوق وفحص شامل لجميع أجزاء السيارات بأعلى درجات الدقة والشفافية.
+                </p>
+            </div>
+
+            <!-- القسم الثاني: استكشف -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-red-500 border-r-2 border-red-500 pr-2">استكشف</h4>
+                <ul class="space-y-2 text-xs text-gray-300">
+                    <li><a href="booking.html" class="hover:text-red-400 transition">حجز موعد فحص</a></li>
+                    <li><a href="report.html" class="hover:text-red-400 transition">تقرير الفحص برقم الجوال</a></li>
+                    <li><a href="index.html" class="hover:text-red-400 transition">الرئيسية</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم الثالث: تواصل معنا -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-red-500 border-r-2 border-red-500 pr-2">تواصل معنا</h4>
+                <div class="space-y-2 text-xs text-gray-300">
+                    <p class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i> 0599878570</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-amber-400 text-sm"></i> 0599878570</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-red-500 text-sm"></i> المملكة العربية السعودية</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- الحقوق السفلية -->
+        <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-[11px] text-gray-500">
+            <p>جميع الحقوق محفوظة © 2026 - مركز المختص الفاحص</p>
+            <p class="text-red-500 font-semibold mt-2 sm:mt-0">الدقة والاحترافية تبدأ من الاختيار</p>
+        </div>
+    </footer>
+
+    <script>
+        let adDataGlobal = {};
+
+        window.onload = function() {
+            let savedAd = localStorage.getItem('site_announcement');
+            if(savedAd) {
+                let ad = JSON.parse(savedAd);
+                adDataGlobal = ad;
+                document.getElementById('indexAdTitle').innerText = ad.title;
+                if(ad.price) {
+                    document.getElementById('indexAdPrice').innerText = ad.price;
+                } else {
+                    document.getElementById('indexAdPrice').style.display = 'none';
+                }
+                if(ad.image) {
+                    let imgEl = document.getElementById('indexAdImg');
+                    imgEl.src = ad.image;
+                    imgEl.style.display = 'block';
+                }
+                document.getElementById('indexAdBanner').style.display = 'block';
+            }
+        };
+
+        function openAdModal() {
+            if(!adDataGlobal.title) return;
+            document.getElementById('modalAdTitle').innerText = adDataGlobal.title;
+            document.getElementById('modalAdText').innerText = adDataGlobal.text || "لا توجد تفاصيل إضافية مسجلة لهذا الإعلان.";
+            document.getElementById('modalAdPrice').innerText = adDataGlobal.price ? "السعر: " + adDataGlobal.price : "";
+            
+            if(adDataGlobal.image) {
+                document.getElementById('modalAdImg').src = adDataGlobal.image;
+                document.getElementById('modalAdImgContainer').style.display = 'block';
+            } else {
+                document.getElementById('modalAdImgContainer').style.display = 'none';
+            }
+            document.getElementById('adModal').style.display = 'flex';
+        }
+
+        function closeAdModal() {
+            document.getElementById('adModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
